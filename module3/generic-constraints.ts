@@ -6,7 +6,7 @@ type MandatoryType = {
   graduate: boolean;
 };
 
-const createProfile = <T extends MandatoryType>(info: T) => {
+const createProfileNew = <T extends MandatoryType>(info: T) => {
   const jobHolder = true;
   const newProfile = { ...info, jobHolder };
   return newProfile;
@@ -20,7 +20,7 @@ type InfoType = {
   property: null;
 };
 
-const info = {
+const information = {
   name: "Tonmoy",
   age: 26,
   graduate: true,
@@ -28,4 +28,4 @@ const info = {
   property: null,
 };
 
-const makeProfile = createProfile<InfoType>(info);
+const makeProfile = createProfileNew<InfoType>(information);
