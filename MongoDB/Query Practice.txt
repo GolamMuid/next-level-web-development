@@ -95,3 +95,91 @@ db.practice.find({
     .projection({ age: 1 })
 
 
+// update : use in non array/primitive fields
+db.practice.updateOne(
+    { _id: ObjectId("6406ad65fc13ae5a400000c6") },
+    {
+        $set: {
+            company: "Intel"
+        }
+    }
+)
+
+// $addToSet: adding values in array (adds one value)
+db.practice.updateOne(
+    { _id: ObjectId("6406ad65fc13ae5a400000c6") },
+    {
+        $addToSet: {
+            interests: "Reading"
+        }
+    }
+)
+
+// $addToSet + $each: adds multiple values in array 
+db.practice.updateOne(
+    { _id: ObjectId("6406ad65fc13ae5a400000c6") },
+    {
+        $addToSet: {
+            interests:{$each: ["Reading", "Playing"]}
+        }
+    }
+)
+
+// $push: pushes single / multiple values in array INCLUDING DUPLICATE
+db.practice.updateOne(
+    { _id: ObjectId("6406ad65fc13ae5a400000c6") },
+    {
+        $push: {
+            interests:{$each: ["Reading", "Playing"]}
+        }
+    }
+)
+
+// $unset: Deletes an entire field
+db.practice.updateOne(
+    { _id: ObjectId("6406ad65fc13ae5a400000c6") },
+    {
+        $unset: {
+            education: ""
+        }
+    }
+)
+
+// $pop: pops one value from an array (1 removes from the last, -1 removes from the start)
+db.practice.updateOne(
+    { _id: ObjectId("6406ad65fc13ae5a400000c6") },
+    {
+        $pop: {
+            interests: 1
+        }
+    }
+)
+
+// $pull: removes a specific value from an array
+db.practice.updateOne(
+    { _id: ObjectId("6406ad65fc13ae5a400000c6") },
+    {
+        $pull: {
+            friends: "Tanmoy Parvez"
+        }
+    }
+)
+
+// $pullAll: removes multiple specific values from an array
+db.practice.updateOne(
+    { _id: ObjectId("6406ad65fc13ae5a400000c6") },
+    {
+        $pullAll: {
+            friends: [ "Mizanur Rahman", "Rasel Ahmed"]
+        }
+    }
+)
+
+// deleteOne: Deletes an entire document
+db.practice.deleteOne({ _id: ObjectId("6406ad65fc13ae5a400000c6") })
+
+
+
+
+
+
