@@ -1,0 +1,37 @@
+db.practice.aggregate([
+    // stage match 
+    { $match: { gender : 'Male', age: { $gt : 18 } } }
+    ])
+  .projection({ age: 1, name: 1 })
+
+// $addFields: adds a field in every document, doesn't change the original document
+db.practice.aggregate([
+    {
+        $addFields: {
+            salary: {
+                $floor: {
+                    $toInt: {
+                        $multiply: [{ $rand: {} }, 100]
+                    }
+                }
+            }
+        }
+    },
+    { $project: { salary: 1 } }
+])
+
+// $merge: changes the original document
+db.practice.aggregate([
+    {
+        $addFields: {
+            salary: {
+                $floor: {
+                    $toInt: {
+                        $multiply: [{ $rand: {} }, 100]
+                    }
+                }
+            }
+        }
+    },
+    { $merge: "practice" }
+])
